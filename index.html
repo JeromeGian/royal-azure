@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Azure Hotel</title>
+    <style>
+        /* =======================
+   GLOBAL STYLES
+======================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Georgia", serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+/* =======================
+   NAVBAR STYLING
+======================= */
+.navbar {
+    width: 100%;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    background: rgba(0, 40, 90, 0.8);
+    backdrop-filter: blur(5px);
+    flex-shrink: 1;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo a, a:visited{
+    text-decoration: none;
+}
+.logo img {
+    width: 3.75rem;
+    aspect-ratio: 1/1;
+}
+
+.logo h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+nav a {
+    margin-left: 40px;
+    color: #89d4ff;
+    font-size: clamp(1rem, calc(1vw + 0.4em), 3rem);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* =======================
+   HERO SECTION
+======================= */
+.hero {
+    width: 100%;
+    background-size: cover;
+    background-image: url("/images/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 80px;
+    align-items: center;
+    aspect-ratio: 16/9;
+}
+.overlay {
+    position: absolute;
+}
+
+/* =======================
+   RESERVATION BOX
+======================= */
+.reservation-box {
+    width: 33vw;
+    padding: 25px;
+    background: rgba(0, 25, 65, 0.85);
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    z-index: 10;
+    height: 25rem;
+}
+
+.reservation-box h2 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #89d4ff;
+    font-size: clamp(1rem, calc(1.3vw + 0.4em), 3rem);
+    max-width:fit-content;
+    overflow: hidden;
+}
+
+.reservation-box label {
+    font-size: 0.95vw;
+}
+
+.reservation-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.reservation-box p{
+    width: 100%;
+    padding: 12px;
+    background: #89d4ff;
+    border: none;
+    font-weight: bold;
+    color: #00285a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+.reservation-box a, a:visited{
+    text-decoration: none;
+}
+
+
+.btn:hover {
+    background: #b9e7ff;
+}
+
+/* =======================
+   TEXT
+======================= */
+.welcome-text {
+    position: relative;
+    z-index: 10;
+    color: #eaf7ff;
+    text-align: right;
+    text-shadow: 2px 2px 5px black;
+}
+
+.welcome-text p {
+    font-size: clamp(1rem, calc(1vw + 0.4em), 3rem);
+    margin-bottom: 10px;
+}
+
+.welcome-text h1 {
+    font-size: clamp(1rem, calc(2vw + 1.4em), 3rem);
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+}
+
+.welcome-text h3 {
+    font-size: clamp(1rem, calc(1vw + 0.4em), 3rem);
+    font-weight: 300;
+}
+/* =======================
+   ROOMS
+======================= */
+
+.rooms-section {
+    width: auto;
+    padding: 80px 100px;
+    background: #eaf7ff;
+}
+
+.rooms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.rooms-header h1 {
+    font-size: 2.67rem;
+    font-weight: 700;
+    color: #00285a;
+    line-height: 1.2;
+}
+
+.rooms-header h1 span {
+    color: #89d4ff; /* azure highlight */
+}
+
+.contact-link {
+    text-align: center;
+    font-size: 18px;
+    text-decoration: none;
+    color: #00285a;
+    border-bottom: 2px solid #89d4ff;
+    padding-bottom: 5px;
+    transition: 0.3s;
+
+}
+.contact-link:hover {
+    color:#89d4ff;
+}
+/* ROOM CARDS */
+.rooms-container {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.room-card {
+    width: 32%;
+    min-width: 320px;
+    background: #002b4f;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition:transform 0.3s ease-in-out;
+    flex-shrink: 0;
+}
+.room-img-wrapper {
+    background-color: white;
+    padding-bottom: 1%;
+    border-radius: 10px 10px 0 0;
+}
+.room-card img {
+    display: block;
+    width: 100%;
+    height: 15vw;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+.room-card:hover {
+    transform: scale(1.03);
+}
+
+/* PRICE TAG */
+.price-tag {
+    position: relative;
+    max-width: fit-content;
+    top: -29px;
+    left: 6.7%;
+    background: rgba(137, 212, 255, 0.9);
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1.2vw;
+    font-weight: 600;
+    color: #00285a;
+}
+
+/* ROOM INFO */
+.room-info {
+    padding: 20px 25px;
+    color: white;
+    position: relative;
+    top: -20px;
+}
+
+.room-info h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+    color: #89d4ff;
+    margin-bottom: 10px;
+}
+
+.room-info p {
+    font-size: 15px;
+    font-family: "Georgia", serif;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.room-info h3 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #bdeaff;
+}
+
+.room-info ul {
+    padding-left: 20px;
+}
+
+.room-info ul li {
+    font-size: 14px;
+    margin-bottom: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+/* SERVICES */
+.services-section{
+    margin-top: 6rem;
+    margin-bottom: 7rem;
+}
+.services-header {
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 3rem;
+
+}
+.services-header h1 {
+    font-size: 20px;
+    color: #003060;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    opacity: 0.75;
+}
+
+.services-header h2 {
+    font-size: 44px;
+    color: #00285a;
+    font-weight: 700;
+}
+
+.services-header h2 span {
+    color: #89d4ff;
+}
+
+.services-subtext {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #3a5c7c;
+    opacity: 0.8;
+}
+.services-container {
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px
+}
+.service-card {
+    width: 32%;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px 10px 0 0;
+    background: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5)
+}
+.service-card:hover {
+    transform: scale(1.03);
+}
+.service-card img {
+    width: 100%;
+    height: 280px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+.service-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 25px 0px;
+    justify-self: center;
+    color: #406488;
+}
+
+/* CONTACTS */
+.contact-section {
+    background-size: cover;
+    background-position: center;
+    background-image: url("/images/contact_header.png");
+    color: white;
+}
+.contact-header {
+    padding: 4rem;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 10px;
+    max-width: fit-content;
+}
+.contact-header h1 {
+    font-size: clamp(2em, calc(1vw + 2em), 5em);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    max-width: max-content;
+}
+.contact-header h2 {
+    font-size: clamp(1.6em, calc(0.8vw + 1em), 4em);
+    border: 3px solid white;
+    max-width: 50%;
+    text-align: center;
+}
+.contact-container {
+    width: 100%;
+    height: 40vw;
+    background: linear-gradient(
+        to right,
+        #89d4ff 0%,
+        #89d4ff 50%,
+        #EAF7FF 50%,
+        #EAF7FF 100%
+    );
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.contact-container-left {
+    width:50%;
+}
+.contact-text{
+    max-width: fit-content;
+    max-height: max-content;
+    align-self: center;
+    justify-self: center;
+}
+.contact-text h2{
+    font-size: 1.67rem;
+    margin-bottom: 25px;
+}
+.contact-text ul{
+    list-style-position: inside;    
+}
+.contact-text ul li{
+    margin: 20px;
+    font-size: 1.25rem
+}
+.contact-container-right{
+    width:50%;
+}
+.contact-box-wrapper {
+    width: 80%;
+    max-width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    justify-self: center;
+}
+.contact-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #d4d4d4;
+    background-color: white;
+    color: #89d4ff;
+    border-radius: 10px;
+    padding: 20px;
+    aspect-ratio: 3 / 2;
+}
+.contact-box h4{
+    font-size: clamp(0.8em, calc(1vw + 0.5em), 4em);
+    border: 2px solid #89d4ff;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}    
+.contact-box h4:hover{
+    color: white;
+    background-color: #89d4ff;
+}
+.contact-box a, a:visited{
+    color: #89d4ff;
+    text-decoration: none;
+}
+.contact-info {
+    margin-top: 18px;
+    display:flex;
+    align-items: center;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    flex: 1 1 0;
+}
+.contact-info p{
+    font-weight: 1em;
+    font-size: 1em;
+}
+.contact-info-1 {
+    padding-bottom:20px
+}
+.contact-box img{
+    width: 2vw;
+}
+/* FOOTER */
+.footer {
+    text-align: center;
+    background: #00285a;
+    color: white;
+    padding: 20px 0;
+    font-size: 15px;
+}
+
+@media (min-width:1000px) and (max-width:1200px){
+    .contact-text{
+        width: 80%;
+    }
+    .rooms-container{
+        gap: 10rem;
+        justify-content: center;
+    }
+    .contact-info p{
+        font-size: 0.8em;
+    }
+}
+@media (min-width:860px) and (max-width:999px){
+    .contact-box img{
+        width: 1.6vw;
+    }
+    .contact-text{
+        width: 70%;
+    }
+    .rooms-container{
+        gap: 10rem;
+        justify-content: center;
+    }
+    .contact-info {
+        margin-top: 10px;
+    }
+    .contact-info p{
+        font-size: 0.67em;
+    }
+}
+@media (min-width:800px) and (max-width:859px){
+    .contact-box img{
+        width: 1.6vw;
+    }
+    .contact-text{
+        width: 80%;
+    }
+    .contact-text h2{
+        font-size: 1.2em;
+    }
+    .contact-text li{
+        font-size: 1em;
+    }
+    .rooms-container{
+        gap: 10rem;
+        justify-content: center;
+    }
+    .contact-info {
+        margin-top: 10px;
+    }
+    .contact-info p{
+        font-size: 0.6em;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="#">
+            <img src="/images/icon.png" alt="Home">
+            </a>
+            <a href="#"><h2>Royal Azure</h2></a>
+        </div>
+
+        <nav>
+            <a href="/#">HOME</a>
+            <a href="#rooms">ROOMS</a>
+            <a href="#services">SERVICE</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <!-- Reservation Box -->
+        <div class="reservation-box">
+            <h2>Reservation</h2>
+
+            <label>Arrival Date</label>
+            <input type="date">
+
+            <label>Departure Date</label>
+            <input type="date">
+
+            <div class="row">
+                <div>
+                    <label>Persons</label>
+                    <input type="number" min="1" value="1">
+                </div>
+
+                <div>
+                    <label>Rooms</label>
+                    <input type="number" min="1" value="1">
+                </div>
+            </div>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScNfHhxGbk2IQEgGH-jbt7vSSr5ibVol3G3IDT0pRRg6zJ_Iw/viewform?usp=header&fbclid=IwY2xjawOnpDVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAEwAAEeJFquAQJYT04CGyt-rFaeWK2IL_woIqjhh4iYqE3xOzBPzfmY65DGJ2vXIHs_aem_tC41LkUdF0lQW5dvGroNGg"><p id="btn">BOOK NOW</p></a>
+        </div>
+
+        <!-- Welcome Text -->
+        <div class="welcome-text">
+            <p>Welcome to</p>
+            <h1>Royal Azure Hotel</h1>
+            <h3>A place to experience and enjoy the life</h3>
+        </div>
+    </section>
+    
+    <section class="rooms-section" id="rooms">
+        <div class="rooms-header">
+            <h1>PICK A ROOM THAT <span>BEST SUITS</span> YOUR TASTE</h1>
+            <a href="#contact" class="contact-link">CONTACT US</a>
+        </div>
+
+        <div class="rooms-container">
+
+            <!-- ROOM 1 -->
+            <div class="room-card">
+                <div class="room-img-wrapper">
+                <img src="/images/room1.jpg" alt="Deluxe King Room">
+                </div>
+                <div class="price-tag">₱5,000 / night</div>
+
+                <div class="room-info">
+                    <h2>Deluxe King Room</h2>
+                    <p>
+                        This room is clean, cozy, and modern. It has a comfortable large bed, soft lighting, and
+                        big windows that let in lots of natural light. It’s a relaxing space for any guest.
+                    </p>
+
+                    <h3>Inclusions:</h3>
+                    <ul>
+                        <li>Large comfortable bed</li>
+                        <li>Private bathroom (hot & cold shower)</li>
+                        <li>Free Wi-Fi</li>
+                        <li>TV with cable channels</li>
+                        <li>Small work desk and chair</li>
+                        <li>Coffee & tea maker</li>
+                        <li>Daily cleaning</li>
+                        <li>Air-conditioning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ROOM 2 -->
+            <div class="room-card">
+                <div class="room-img-wrapper">
+                <img src="/images/room2.jpg" alt="Twin Deluxe Room">
+                </div>
+                <div class="price-tag">₱8,000 / night</div>
+
+                <div class="room-info">
+                    <h2>Twin Deluxe Room</h2>
+                    <p>
+                        This room is bright, modern, and comfortable. It has two clean and cozy beds,
+                        warm lighting, and a window with a nice view — perfect for friends, family, or anyone needing more space.
+                    </p>
+
+                    <h3>Inclusions:</h3>
+                    <ul>
+                        <li>Two single beds</li>
+                        <li>Private bathroom (hot & cold shower)</li>
+                        <li>Free Wi-Fi</li>
+                        <li>TV with cable channels</li>
+                        <li>Work desk and chair</li>
+                        <li>Coffee & tea maker</li>
+                        <li>Air-conditioning</li>
+                        <li>Daily cleaning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ROOM 3 -->
+            <div class="room-card" id="room-3">
+                <div class="room-img-wrapper">
+                <img src="/images/room3.jpg" alt="Family Suite Japan Style">
+                </div>
+                <div class="price-tag">₱15,000 / night</div>
+
+                <div class="room-info">
+                    <h2>Family Suite (Japanese Style)</h2>
+                    <p>
+                        This spacious room has a warm and relaxing design with soft lighting. Multiple beds arranged
+                        in a cozy layout make it perfect for families or groups wanting comfort and harmony.
+                    </p>
+
+                    <h3>Inclusions:</h3>
+                    <ul>
+                        <li>Multiple comfortable beds</li>
+                        <li>Two private bathrooms</li>
+                        <li>Free Wi-Fi</li>
+                        <li>TV with cable channels</li>
+                        <li>Large family table</li>
+                        <li>Coffee & tea maker</li>
+                        <li>Air-conditioning</li>
+                        <li>Daily cleaning</li>
+                        <li>Seating area near window</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="services-section" id="services">
+        <div class="services-header">
+        <h1>ROYAL AZURE HOTEL</h1>
+        <h2>OUR SPECIAL <span>SERVICES</span></h2>
+        <p class="services-subtext">Experience comfort, luxury, and top-tier hospitality.</p>
+        </div>
+        <div class="services-container">
+            <div class="service-card">
+                <img src="/images/service1.jpg" alt="Luxury Spa">
+                <h2 class="service-text">Luxury Spa</h2>
+            </div>
+            <div class="service-card">
+                <img src="/images/service2.jpg" alt="Luxury Spa">
+                <h2 class="service-text">Free Wi-Fi</h2>
+            </div>
+            <div class="service-card">
+                <img src="/images/service3.png" alt="Luxury Spa">
+                <h2 class="service-text">Restaurant</h2>
+            </div>
+        </div>
+    </section>
+<!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+        <div class="contact-header">
+            <h1>Royal Azure Hotel</h1>
+            <h2>CONTACT US</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-container-left">
+                <div class="contact-text">
+                    <h2>CONTACT US BY:</h2>
+                    <ul>
+                        <li>calling or texting with our phone numbers;</li>
+                        <li>visiting our sites;</li>
+                        <li>sending an email to our address;</li>
+                        <li>and messaging our respective social media platforms</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contact-container-right">
+                <div class="contact-box-wrapper">
+                    <div class="contact-box">
+                        <a href="tel:+639456747562"><h4>CALL US</h4></a>
+                        <div class="contact-info">
+                            <img src="/images/call_icon.png" alt="Contact Icon">
+                            <p>(+63) 945 674 7562</p>
+                        </div>
+                        <div class="contact-info">
+                            <img src="/images/call_icon.png" alt="Contact Icon">
+                            <p>(+63) 913 465 8463</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <a href="https://maps.app.goo.gl/MrgriqsiTc7fC4637" target=_blank><h4>VISIT US</h4></a>
+                        <div class="contact-info contact-info-1">
+                            <img src="/images/loc_icon.png" alt="Contact Icon">
+                            <p>Lipa City, Batangas, 4217</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <a href="mailto:royalazurehotel12@gmail.com"><h4>EMAIL US</h4></a>
+                        <div class="contact-info">
+                            <img src="/images/mail_icon.png" alt="Contact Icon">
+                            <p>royalazurehotel12@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-box">
+                        <a href="https://www.facebook.com/profile.php?id=61584782697983" target=_blank><h4>FOLLOW US</h4></a>
+                        <div class="contact-info contact-info-1">
+                            <img src="/images/fb_icon.png" alt="Contact Icon">
+                            <p>Royal Azure Hotel</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2025 Royal Azure Hotel. All rights reserved.
+</footer>
+</body>
+</html>
